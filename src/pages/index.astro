@@ -1,0 +1,74 @@
+---
+import Layout from "../layouts/Layout.astro";
+import TopBar from "../components/TopBar.astro";
+import Cover from "../components/Cover.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+// Original approved About copy lives in About.astro; AboutShort is the condensed version in use.
+import About from "../components/AboutShort.astro";
+import Process from "../components/Process.astro";
+import Contact from "../components/Contact.astro";
+
+const projects = [
+  {
+    variant: "video" as const,
+    ptag: "Education · Academia Albamar",
+    title: "Built to drive enrollment",
+    lede: "Attention turned into sign-ups — not just reach.",
+    bunny: "b688d4cc-ff6e-47d1-8094-8b4033e6d9c6",
+    ariaLabel: "Play the Academia Albamar enrollment video",
+    poster: "poster-albamar.jpg",
+    feed: true,
+    metrics: [
+      { value: "400K", suffix: "+", label: "views" },
+      { value: "150", suffix: "+", label: "enroll comments" },
+    ],
+  },
+  {
+    variant: "video" as const,
+    ptag: "Education · Tecnológico Atenea",
+    title: "A campaign that filled the room",
+    lede: "Online attention into real-world attendance.",
+    bunny: "VIDEO_ID_ATENEA",
+    ariaLabel: "Play the Tecnológico Atenea campaign video",
+    poster: "poster-atenea.jpg",
+    feed: false,
+    metrics: [
+      { value: "~200K", label: "views" },
+      { value: "19K", suffix: "+", label: "likes" },
+      { value: "100", suffix: "+", label: "at the event" },
+    ],
+  },
+  {
+    variant: "slot" as const,
+    ptag: "Next case study",
+    title: "Your brand could be here",
+    lede: "Reserved for the next results-driven campaign.",
+  },
+];
+---
+
+<Layout>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <TopBar />
+
+  <main id="top">
+    <Cover />
+
+    <section class="panel" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="work-head">
+          <p class="sec-tc"><span class="bar"></span>00:09 — Featured work</p>
+          <h2 id="work-title" data-reveal>
+            Made to convert — not just to reach.
+          </h2>
+        </div>
+        {projects.map((p) => <ProjectCard {...p} />)}
+      </div>
+    </section>
+
+    <About />
+    <Process />
+    <Contact />
+  </main>
+</Layout>

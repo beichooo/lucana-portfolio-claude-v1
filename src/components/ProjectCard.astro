@@ -1,0 +1,80 @@
+---
+interface Metric {
+  value: string;
+  suffix?: string;
+  label: string;
+}
+interface Props {
+  variant?: 'video' | 'slot';
+  ptag: string;
+  title: string;
+  lede: string;
+  metrics?: Metric[];
+  bunny?: string;
+  ariaLabel?: string;
+  poster?: string;
+  badge?: string;
+  feed?: boolean;
+}
+
+const {
+  variant = 'video',
+  ptag,
+  title,
+  lede,
+  metrics = [],
+  bunny,
+  ariaLabel,
+  poster,
+  badge = 'Reel · 9:16',
+  feed = false,
+} = Astro.props;
+---
+<article class:list={['project', { slot: variant === 'slot' }]}>
+  <div class="pmedia" data-reveal>
+    {variant === 'video' ? (
+      <div class="stack">
+        <div class="phone">
+          <button class="facade" data-bunny={bunny} aria-label={ariaLabel}>
+            {/* To use a real poster, replace this div with:
+                <img class="poster" src={`/${poster}`} alt={`${ptag} — opening frame`} loading="lazy" decoding="async" /> */}
+            <div class="poster poster--ph"><span>Poster 9:16<br />{poster}</span></div>
+            <span class="badge">{badge}</span>
+            <span class="play">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+            </span>
+            <span class="scrub"></span>
+          </button>
+        </div>
+        {feed && (
+          <div class="feed" aria-label="Instagram stills">
+            <div class="cell"><span>IG 01</span></div>
+            <div class="cell"><span>IG 02</span></div>
+            <div class="cell"><span>IG 03</span></div>
+          </div>
+        )}
+      </div>
+    ) : (
+      <div class="slot-frame">
+        <span class="plus" aria-hidden="true">+</span>
+        <span class="t">Open slot</span>
+      </div>
+    )}
+  </div>
+
+  <div data-reveal data-d="1">
+    <p class="ptag">{ptag}</p>
+    <h3>{title}</h3>
+    <p class="lede">{lede}</p>
+    {metrics.length > 0 && (
+      <div class="metrics">
+        {metrics.map((m) => (
+          <div class="metric">
+            <span class="n">{m.value}{m.suffix && <span class="dot">{m.suffix}</span>}</span>
+            <span class="l">{m.label}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</article>

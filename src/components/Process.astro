@@ -1,0 +1,55 @@
+---
+const phases = [
+  {
+    n: '01',
+    step: 'Phase 01',
+    arrow: false,
+    title: 'Strategy',
+    body: 'Who it’s for, what they need to hear, what it should make them do. A decision, not a guess.',
+  },
+  {
+    n: '02',
+    step: 'Phase 02',
+    arrow: true,
+    title: 'Script',
+    body: 'Hooks that stop the scroll, structure that holds attention to the last second.',
+  },
+  {
+    n: '03',
+    step: 'Phase 03',
+    arrow: true,
+    title: 'Edit',
+    body: 'Pacing, captions, sound and motion that keep retention high and make the message land.',
+  },
+];
+
+const tools = ['Premiere Pro', 'After Effects', 'CapCut', 'Photoshop'];
+---
+<section class="panel" id="process" aria-labelledby="process-title">
+  <div class="wrap">
+    <p class="sec-tc" data-reveal><span class="bar"></span>00:38 — Services &amp; expertise</p>
+    <p class="eyebrow" data-reveal>What I do</p>
+    <p class="lead" id="process-title" data-reveal data-d="1">One person, full system — from strategy to final cut.</p>
+
+    <div class="phases" data-reveal>
+      {phases.map((p) => (
+        <div class="phase">
+          <span class="num" aria-hidden="true">{p.n}</span>
+          <div class="step">
+            <span>{p.step}</span>
+            {p.arrow && <span class="arrow" aria-hidden="true">&rarr;</span>}
+          </div>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="tools" data-reveal data-d="1">
+      <span class="label">Tools I work with</span>
+      <div class="chips">
+        {tools.map((t) => <span class="chip">{t}</span>)}
+      </div>
+    </div>
+  </div>
+</section>
